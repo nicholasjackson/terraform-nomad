@@ -1,5 +1,5 @@
 module "vpc" {
-  source = "/Users/nicj/Developer/terraform/terraform-modules/vpc"
+  source = "git@github.com:nicholasjackson/terraform-modules.git//vpc"
 
   aws_region            = "${var.aws_region}"
   aws_access_key_id     = "${var.aws_access_key_id}"
@@ -8,7 +8,7 @@ module "vpc" {
 }
 
 module "servers" {
-  source = "/Users/nicj/Developer/terraform/terraform-modules/hashicorp-suite"
+  source = "git@github.com:nicholasjackson/terraform-modules.git//hashicorp-suite"
 
   namespace = "${var.namespace}-server"
 
@@ -31,12 +31,12 @@ module "servers" {
   nomad_type    = "server"
   nomad_version = "${var.nomad_version}"
 
-  hashiui_enabled = true
+  hashiui_enabled = false
   hashiui_version = "${var.hashiui_version}"
 }
 
 module "clients" {
-  source = "/Users/nicj/Developer/terraform/terraform-modules/hashicorp-suite"
+  source = "git@github.com:nicholasjackson/terraform-modules.git//hashicorp-suite"
 
   namespace = "${var.namespace}-client"
 
