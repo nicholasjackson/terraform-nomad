@@ -1,9 +1,13 @@
+data "aws_route53_zone" "selected" {
+  name = "demo.gs."
+}
+
 data "aws_alb" "servers" {
   arn = "${module.servers.alb_arn}"
 }
 
 resource "aws_route53_record" "server" {
-  zone_id = "ZVLJSGKGPAPCY"
+  zone_id = "${data.aws_route53_zone.selected.zone_id}"
   name    = "server.demo.gs"
   type    = "A"
 
@@ -19,7 +23,7 @@ data "aws_alb" "clients" {
 }
 
 resource "aws_route53_record" "www" {
-  zone_id = "ZVLJSGKGPAPCY"
+  zone_id = "${data.aws_route53_zone.selected.zone_id}"
   name    = "www.demo.gs"
   type    = "A"
 

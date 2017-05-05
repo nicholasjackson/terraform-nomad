@@ -1,3 +1,11 @@
+output "route_53_server" {
+  value = "${aws_route53_record.server.name}"
+}
+
+output "route_53_www" {
+  value = "${aws_route53_record.www.name}"
+}
+
 output "alb_server_dns" {
   value = "${module.servers.alb_dns}"
 }
