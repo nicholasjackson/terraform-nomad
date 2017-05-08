@@ -1,25 +1,11 @@
-module "vpc" {
-  source = "git@github.com:nicholasjackson/terraform-modules.git//vpc"
-
-  aws_region            = "${var.aws_region}"
-  aws_access_key_id     = "${var.aws_access_key_id}"
-  aws_secret_access_key = "${var.aws_secret_access_key}"
-  namespace             = "${var.namespace}"
-}
-
 module "servers" {
-  source = "git@github.com:nicholasjackson/terraform-modules.git//hashicorp-suite"
+  source = "./nomad"
 
   namespace = "${var.namespace}-server"
-
   instances = "${var.nomad_servers}"
 
-  aws_region            = "${var.aws_region}"
-  aws_access_key_id     = "${var.aws_access_key_id}"
-  aws_secret_access_key = "${var.aws_secret_access_key}"
-  aws_zones             = "${var.aws_zones}"
-  subnets               = ["${module.vpc.subnets}"]
-  vpc_id                = "${module.vpc.id}"
+  subnets = ["${aws_subnet.default.*.id}"]
+  vpc_id  = "${aws_vpc.default.id}"
 
   consul_enabled        = true
   consul_type           = "server"
@@ -32,22 +18,16 @@ module "servers" {
   nomad_version = "${var.nomad_version}"
 
   hashiui_enabled = false
-  hashiui_version = "${var.hashiui_version}"
 }
 
 module "clients" {
-  source = "git@github.com:nicholasjackson/terraform-modules.git//hashicorp-suite"
+  source = "./nomad"
 
   namespace = "${var.namespace}-client"
-
   instances = "${var.nomad_agents}"
 
-  aws_region            = "${var.aws_region}"
-  aws_access_key_id     = "${var.aws_access_key_id}"
-  aws_secret_access_key = "${var.aws_secret_access_key}"
-  aws_zones             = "${var.aws_zones}"
-  subnets               = ["${module.vpc.subnets}"]
-  vpc_id                = "${module.vpc.id}"
+  subnets = ["${aws_subnet.default.*.id}"]
+  vpc_id  = "${aws_vpc.default.id}"
 
   consul_enabled        = true
   consul_type           = "client"

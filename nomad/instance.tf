@@ -57,12 +57,11 @@ resource "aws_autoscaling_group" "default" {
   launch_configuration = "${aws_launch_configuration.default.name}"
   vpc_zone_identifier  = ["${var.subnets}"]
 
-  target_group_arns = ["${compact(list(
-join("", aws_alb_target_group.nomad.*.arn),
-join("", aws_alb_target_group.consul.*.arn),
-join("", aws_alb_target_group.ui.*.arn),
-join("", aws_alb_target_group.fabio.*.arn)
-))}"]
+  target_group_arns = ["${concat(
+    aws_alb_target_group.nomad.*.arn,
+    aws_alb_target_group.consul.*.arn,
+    aws_alb_target_group.ui.*.arn,
+    aws_alb_target_group.fabio.*.arn)}"]
 
   tag = {
     key                 = "Name"

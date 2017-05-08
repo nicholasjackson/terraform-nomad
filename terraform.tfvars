@@ -1,5 +1,3 @@
-aws_zones = ["eu-west-1a", "eu-west-1b", "eu-west-1c"]
-
 namespace = "nomad-consul"
 
 consul_version = "0.8.1"

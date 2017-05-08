@@ -5,23 +5,6 @@ variable "instances" {
 }
 
 # AWS Specific variables
-variable "aws_region" {
-  description = "AWS region to create the environment"
-}
-
-variable "aws_access_key_id" {
-  description = "AWS access key"
-}
-
-variable "aws_secret_access_key" {
-  description = "AWS secret"
-}
-
-variable "aws_zones" {
-  description = "List of AWS availability zones"
-  type        = "list"
-}
-
 variable "instance_type" {
   default = "t2.micro"
 }
@@ -86,4 +69,5 @@ variable "hashiui_enabled" {
 
 variable "hashiui_version" {
   description = "Version number for hashi-ui"
+  default     = "0.3.6"
 }
