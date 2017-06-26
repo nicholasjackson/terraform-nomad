@@ -31,6 +31,7 @@ job "fabio" {
 
         port_map {
           http = 9999
+          http = 9998
         }
       }
 
@@ -54,9 +55,10 @@ job "fabio" {
       service {
         name = "fabio"
         tags = ["router"]
-        port = "admin"
+        port = "http"
 
         check {
+          port     = "admin"
           name     = "alive"
           type     = "http"
           interval = "10s"
