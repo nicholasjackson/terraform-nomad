@@ -9,9 +9,8 @@ variable "instance_type" {
   default = "t2.micro"
 }
 
-variable "public_key_path" {
-  description = "The absolute path on disk to the SSH public key."
-  default     = "~/.ssh/id_rsa.pub"
+variable "key_name" {
+  description = "The id of the ssh key to add to the servers"
 }
 
 variable "subnets" {
@@ -21,6 +20,18 @@ variable "subnets" {
 
 variable "vpc_id" {
   description = "The id of the VPC which the servers are attached to"
+}
+
+variable "internal_alb_arn" {
+  description = "The arn of the internal alb"
+}
+
+variable "external_alb_arn" {
+  description = "The arn of the external alb"
+}
+
+variable "security_group" {
+  description = "The id of the security group"
 }
 
 # Consul configuration

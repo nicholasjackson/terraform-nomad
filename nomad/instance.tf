@@ -41,10 +41,10 @@ resource "aws_launch_configuration" "default" {
 
   image_id      = "${data.aws_ami.ubuntu-1604.id}"
   instance_type = "${var.instance_type}"
-  key_name      = "${aws_key_pair.nomad.id}"
+  key_name      = "${var.key_name}"
 
   iam_instance_profile = "${aws_iam_instance_profile.consul-join.name}"
-  security_groups      = ["${aws_security_group.default.id}"]
+  security_groups      = ["${var.security_group}"]
 
   user_data = "${data.template_file.startup.rendered}"
 }

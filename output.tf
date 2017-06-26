@@ -1,15 +1,11 @@
-output "alb_server_dns" {
-  value = "${module.servers.alb_dns}"
+output "alb_dns" {
+  value = "${aws_alb.external.dns_name}"
 }
 
-output "alb_server_arn" {
-  value = "${module.servers.alb_arn}"
+output "alb_arn" {
+  value = "${aws_alb.external.arn}"
 }
 
-output "alb_clients_dns" {
-  value = "${module.clients.alb_dns}"
-}
-
-output "alb_clients_arn" {
-  value = "${module.clients.alb_arn}"
+output "ssh_host" {
+  value = "${aws_instance.ssh_host.public_ip}"
 }

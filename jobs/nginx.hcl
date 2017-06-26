@@ -22,10 +22,6 @@ job "nginx" {
     task "nginx" {
       driver = "docker"
 
-      env = {
-        registry.consul.addr = "${NOMAD_IP_http}:8500"
-      }
-
       config {
         image = "nginx:latest"
 

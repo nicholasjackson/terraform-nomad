@@ -14,8 +14,3 @@ data "aws_ami" "ubuntu-1604" {
 
   owners = ["099720109477"] # Canonical
 }
-
-resource "aws_key_pair" "nomad" {
-  key_name   = "${var.namespace}-nomad"
-  public_key = "${file("${var.public_key_path}")}"
-}

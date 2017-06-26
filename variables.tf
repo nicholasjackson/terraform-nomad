@@ -50,3 +50,8 @@ variable "nomad_servers" {
 variable "nomad_agents" {
   description = "The number of nomad agents"
 }
+
+variable "public_key_path" {
+  description = "The absolute path on disk to the SSH public key."
+  default     = "~/.ssh/id_rsa.pub"
+}
